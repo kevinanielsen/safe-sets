@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ThreeDots } from 'react-loader-spinner';
 import { baseUrl } from '../db';
 
 export default function Home() {
@@ -8,26 +9,34 @@ export default function Home() {
 
   useEffect(() => {
     fetch(`${baseUrl}/collections/users/records`)
-      .then((response) => response.json())
-      .then((actualData) => {
-        if(actualData.items) {
-          setData(actualData);
-          setLoading(false);
+      .then((response) => {
+        if(!response.ok){
+          throw new Error(
+            `This is an HTTP error: The status is ${response.status}`
+          ) 
         } else {
-          setError(actualData.message);
+          return response.json();
         }
       })
-      .catch((err) => {
-        console.log(err.message);
-        setError(err.message);
+      .then((actualData) => {
+        setData(actualData);
+        setError(null);
       })
-  }, [setData, setLoading])
+      .catch((err) => {
+        setError(err.message);
+        setData(null);
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+  }, [])
 
 
   return( 
-    <div className='flex flex-col items-center justify-center w-screen h-screen'>
+    <div className='flex flex-col items-center justify-center'>
       {data && data.items[0].name}
       {error && error}
+      {loading && <ThreeDots color="#177ed7" />}
     </div>
   )
 }

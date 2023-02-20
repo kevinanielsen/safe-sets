@@ -1,19 +1,23 @@
+import { CalendarCheck, ChartLineUp, Plus } from 'phosphor-react';
 import { Link, Outlet } from 'react-router-dom';
 
 export default function Layout() {
   return(
     <>
-      <nav className="p-4 bg-main shadow">
-        <Link className="text-secondary hover:text-white px-3 py-2 rounded-md text-sm xs:text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl font-medium" to="/">
-            Home
-        </Link>
-        <Link className="text-secondary hover:text-white px-3 py-2 rounded-md text-sm xs:text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl font-medium" to="/login">
-            Login
-        </Link>
-      </nav>
-      <main className='min-h-screen min-w-screen'>
+      <main className='m-2'>
         <Outlet />
       </main>
+      <footer className='h-12 w-screen bg-light fixed bottom-0 left-0 right-0'>
+        <nav className="">
+          <ul className='flex justify-between items-center mx-4 my-2'>
+            <li><Link to="/calendar" ><CalendarCheck size={32} color="#177ED7" weight="bold" /></Link></li>
+            <li><Link to="/new-workout"><Plus size={32} color="#177ED7" weight="bold" /></Link></li>
+            <li><Link to="/stats"><ChartLineUp size={32} color="#177ED7" weight="bold" /></Link></li>
+          </ul>
+          
+        </nav>
+      </footer>
+      
     </>
   )
 }

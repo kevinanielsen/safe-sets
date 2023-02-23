@@ -1,3 +1,5 @@
+const { Calculator } = require('phosphor-react');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -13,8 +15,15 @@ module.exports = {
         "accent": "#13B4A1"
       },
       fontFamily: {
-        "main": ['Inter', 'Open Sans', 'serif']
+        "main": ['Inter', 'Open Sans', 'system-ui']
+      },
+      borderRadius: {
+        "main": '16px',
+      },
+      height: {
+        "main": 'calc(100vh - 48px)'
       }
+
     },
   },
   plugins: [],

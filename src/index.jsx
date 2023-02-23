@@ -9,7 +9,6 @@ import NewWorkout from './pages/NewWorkout';
 import Settings from "./pages/Settings";
 import Stats from './pages/Stats';
 
-
 export default function App() {
   return (
     <BrowserRouter>

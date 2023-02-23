@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Layout from './pages/Layout';
 import Login from './pages/Login';
 import NewWorkout from './pages/NewWorkout';
+import Settings from "./pages/Settings";
 import Stats from './pages/Stats';
 
 
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="calendar" element={<Calendar />} />
           <Route path="stats" element={<Stats />} />
           <Route path="new-workout" element={<NewWorkout />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

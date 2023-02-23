@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 export default function Layout() {
   return(
     <>
-      <main className='m-2'>
+      <main>
         <Outlet />
       </main>
       <footer className='h-12 w-screen bg-light fixed bottom-0 left-0 right-0'>

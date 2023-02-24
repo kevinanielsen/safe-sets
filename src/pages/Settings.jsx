@@ -5,6 +5,10 @@ export default function Settings() {
     db.authStore.clear();
   }
 
+  if(!db.authStore.model && path != '/login') {
+    navigate('/login');
+  }
+
   return(
     <>
       <h1>Settings</h1>

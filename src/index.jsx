@@ -7,6 +7,7 @@ import Layout from './pages/Layout';
 import Login from './pages/Login';
 import NewWorkout from './pages/NewWorkout';
 import Settings from "./pages/Settings";
+import Signup from './pages/Signup';
 import Stats from './pages/Stats';
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="stats" element={<Stats />} />
           <Route path="new-workout" element={<NewWorkout />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="signup" element={<Signup />} />
         </Route>
       </Routes>
     </BrowserRouter>

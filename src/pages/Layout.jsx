@@ -1,9 +1,10 @@
 import { ArrowCircleLeft, CalendarCheck, ChartLineUp, Plus } from 'phosphor-react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigation } from 'react-router-dom';
 
 export default function Layout() {
   const location = useLocation();
-  const path = location.pathname;
+  const path = location.pathname; 
+
   return(
     <>
       <Outlet />

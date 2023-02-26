@@ -25,8 +25,7 @@ export default function Home() {
     }
   }, [user])
 
-  // // Fetch user data from database
-  
+  // Fetch user data from database
   useEffect(() => {
     if(user.id) {
       db.collection('users').getOne(user.id)
@@ -74,7 +73,7 @@ export default function Home() {
         </Link>
       </header>
       <main className=''>
-        <WorkoutDays />
+        <WorkoutDays user={user.id} />
         {/* <Progress /> */}
         <section className='mb-2'>
           <h2>Recent articles</h2>

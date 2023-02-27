@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { db } from '../db';
 
 export default function Login() {
@@ -36,6 +37,7 @@ export default function Login() {
         setPassword('');
         setUsername('');
         db.authStore.exportToCookie();
+        toast.success(`Welcome back, ${db.authStore.model.name.split(' ')[0]}`)
       })
       .catch((err) => {
         setError(err.message);
@@ -73,6 +75,7 @@ export default function Login() {
           className='transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64'
         />
       </form>
+      <p className='mt-4'>Don't have an account? <Link to='/signup' className='underline'>Sign up</Link></p>
     </main>
   )
 }

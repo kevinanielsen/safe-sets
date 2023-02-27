@@ -18,13 +18,16 @@ export default function WorkoutDays(props) {
   const worked = []
 
   const today = new Date();
-  const weekAgo = new Date();
-  weekAgo.setDate(weekAgo.getDate() - 7);
-
+  const weekStart = new Date();
+  weekStart.setDate(weekStart.getDate() - (1 - today.getDay()));
+  weekStart.setHours(0)
+  weekStart.setMinutes(0)
+  weekStart.setSeconds(0)
+  
   // Fetch workouts in the past 7 days
   useEffect(() => {
     db.collection('workout').getList(1, 7, {
-      filter: `created >= "${weekAgo.toISOString()}" && user = "${props.user}"`
+      filter: `created >= "${weekStart.toISOString()}" && user = "${props.user}"`
     })
       .then((response) => {
         if(response.items) {

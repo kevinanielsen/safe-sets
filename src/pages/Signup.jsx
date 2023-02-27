@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { db } from '../db';
 
 export default function Signup() {
@@ -22,14 +23,13 @@ export default function Signup() {
   function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    db.collection('users').create({
-      "username": username,
-      "email": "test@example.com",
-      "emailVisibility": true,
-      "password": password,
-      "passwordConfirm": password,
-      "name": name,
-    })
+    formData.append('username', username)
+    formData.append('email', email)
+    formData.append('emailVisibility', true)
+    formData.append('password', password)
+    formData.append('passwordConfirm', password)
+    formData.append('name', name)
+    db.collection('users').create(formData)
       .then((response) => {
         setLoading(false);
         setData(response);
@@ -39,13 +39,15 @@ export default function Signup() {
         setEmail('')
         setPassword('')
         navigate('/login')
+        toast.success('Account created!')
       })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
-        console.log('final error')
       })
   }
+
+  const fileInput = useRef(null)
 
   function handlePassword(e) {
     setPassword(e.target.value)
@@ -58,6 +60,14 @@ export default function Signup() {
   }
   function handleUsername(e) {
     setUsername(e.target.value)
+  }
+
+  const formData = new FormData();
+
+  function handleFileInput(e) {
+    for (let file of fileInput.current.files) {
+      formData.append('avatar', file);
+    }
   }
   
   return(
@@ -87,10 +97,17 @@ export default function Signup() {
             className='transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64'
           />
         </div>
-        <input type="submit" value="Submit" 
+        <div className="flex flex-col">
+          <label htmlFor="fileInput">Profile picture</label>
+          <input type="file" name="fileInput" id="fileInput" ref={fileInput} onChange={handleFileInput} accept="image/png, image/jpeg"
+            className='transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64'
+          />
+        </div>
+        <input type="submit" value="Submit"
           className='transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64'
         />
       </form>
+      <p className='mt-4'>Already have an account? <Link to="/login" className='underline'>Login</Link></p>
     </main>
   )
 }

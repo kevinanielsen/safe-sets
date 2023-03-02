@@ -22,6 +22,9 @@ module.exports = {
       },
       height: {
         "main": 'calc(100vh - 48px)'
+      },
+      width: {
+        "template": 'calc(50% - 8px)'
       }
 
     },

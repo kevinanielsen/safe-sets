@@ -7,22 +7,27 @@ import { db } from '../db';
 export default function NewWorkout() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [templates, setTemplates] = useState([])
 
   useEffect(() => {
-    pb.collection('templates').getFullList(200, {
+    db.collection('templates').getFullList(200, {
       sort: '-created',
     })
     .then((response) => {
-      console.log(response);
+      setTemplates(response);
     })
-  })
+      
+      
+  }, [])
 
   return(
-    <main>
+    <main className='m-4'>
       <h1 className='font-bold font-main text-xl'>New workout</h1>
-      <button className='font-bold font-main text-main text-base p-4 mt-4 w-full text-left bg-light rounded-main'>Start empty workout</button>
+      <button className='font-bold font-main text-main text-base p-4 my-4 w-full text-left bg-light rounded-main'>Start empty workout</button>
       <h1 className='font-bold font-main text-xl'>Templates</h1>
-      {templates.map((template) => <Template workout={template}/>)}
+      <div className='mt-4 flex flex-wrap gap-4 justify-between'>
+        {templates.map((template) => <Template key={template.id} workout={template}/>)}
+      </div>
     </main>
   )
 }

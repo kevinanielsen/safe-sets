@@ -62,31 +62,27 @@ export default function Template(props) {
       </div>
     )
   }
-
-  // {sets && sets.map((set) => {
-  //   <h1>{set.exercise.name}</h1>
-  // })}
-
-  console.log(
-    exercises.find((exercise) => {
-      return exercise.id == ids[0].exercise
-    })
-  )
-
-  // console.log(ids.map((id) => {
-  //   exercises.find((exercise) => {
-  //     return exercise.id == id.exercise
-  //   })
-  // }))
-
+  
   return(
     <div className="bg-light rounded-main w-template flex flex-col p-4 gap-1">
       <h1 className="font-bold text-base text-main">{template.name}</h1>
-      <h1>{ids.map((id) => {
-          exercises.find((exercise) => {
-            return exercise.id == id.exercise
-          }).name
-        })}</h1>
+      <ul>
+        {ids && 
+          ids.map((id) => {
+            return (
+              <li key={id.id}>
+                <div className='flex justify-between'>
+                  <h2 className='w-[5ch] leading-none'>{exercises.find((exercise) => {
+                    return exercise.id == id.exercise
+                  }).name}</h2>
+                  <h3 className='text-accent'>{id.reps} x {id.weight}</h3>
+                </div>
+                <hr className='my-2 border-muted' />
+              </li>
+            )
+          })
+        }
+      </ul>
     </div>
     
   )

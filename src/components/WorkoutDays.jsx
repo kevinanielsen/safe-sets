@@ -19,7 +19,7 @@ export default function WorkoutDays(props) {
 
   const today = new Date();
   const weekStart = new Date();
-  weekStart.setDate(weekStart.getDate() - (1 - today.getDay()));
+  weekStart.setDate(weekStart.getDate() - Math.abs(1 - today.getDay()));
   weekStart.setHours(0)
   weekStart.setMinutes(0)
   weekStart.setSeconds(0)

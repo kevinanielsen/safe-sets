@@ -12,7 +12,9 @@ export default function Layout() {
   return(
     <>
       <ToastContainer />
-      <h1 className='text-center underline'>Safe Sets</h1>
+      <header className='bg-main p-2'>
+        <h1 className='text-center text-light font-bold text-xl'>Safe Sets</h1>
+      </header>
       <Outlet />
       {pathSum === 2 && <footer className='h-12 w-screen bg-light fixed bottom-0 left-0 right-0'>
         <nav className="">

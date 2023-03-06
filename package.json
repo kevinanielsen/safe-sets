@@ -10,6 +10,7 @@
     "e2e": "cypress open"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.3",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -24,6 +25,7 @@
     "autoprefixer": "^10.4.13",
     "chance": "^1.1.10",
     "cypress": "^12.7.0",
+    "netlify-cli": "^13.0.1",
     "pocketbase": "^0.11.1",
     "postcss": "^8.4.21",
     "react-router-dom": "^6.8.1",

@@ -2,6 +2,7 @@ import { Gear } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import { Link, useNavigate } from 'react-router-dom';
+import Articles from '../components/Articles';
 import Progress from '../components/Progress';
 import WorkoutDays from '../components/WorkoutDays';
 import { baseUrl, db } from '../db';
@@ -75,10 +76,7 @@ export default function Home() {
       <main className=''>
         <WorkoutDays user={user.id} />
         {/* <Progress /> */}
-        <section className='mb-2'>
-          <h2>Recent articles</h2>
-          <article className='h-24 bg-light rounded-main'></article>
-        </section>
+        <Articles />
       </main>
     </div>
   )

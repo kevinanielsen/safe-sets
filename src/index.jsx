@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
+import Article from "./pages/Article";
 import Calendar from './pages/Calendar';
 import Home from './pages/Home';
 import Layout from './pages/Layout';
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="settings" element={<Settings />} />
           <Route path="signup" element={<Signup />} />
           <Route path="workout/:id" element={<Workout />} />
+          <Route path="articles/:id" element={<Article />} />
         </Route>
       </Routes>
     </BrowserRouter>

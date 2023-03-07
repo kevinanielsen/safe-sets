@@ -69,7 +69,7 @@ export default function Home() {
           <img src={`${baseUrl}files/users/${data.id}/${data.avatar}?thumb=200x200`} alt="profile picture" className='w-20 h-20 rounded-full bg-light' />
           <h1 className='text-base font-main font-bold w-[13ch] flex justify-center items-center'>Good morning, {data.name.split(' ')[0]}</h1>
         </div>
-        <Link to="/settings" className='bg-light rounded-full w-10 h-10 flex items-center justify-center'>
+        <Link to="/settings" aria-label='Settings' className='bg-light rounded-full w-10 h-10 flex items-center justify-center'>
           <Gear size="32px" color="#177ed7" />
         </Link>
       </header>

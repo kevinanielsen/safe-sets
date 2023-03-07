@@ -42,14 +42,19 @@ export default function Workout() {
 
   return(
     <main className="flex flex-col m-4">
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-4">
         <input 
           type="text" 
           value={workoutName} 
           onChange={(e) => setWorkoutName(e.value)}
           className="text-xl font-bold text-gray-500"
         />
-        <hr />
+        <p className="flex justify-end grow">{new Date().toDateString()}</p>
+        
+      </div>
+      <hr className="border-light border mb-4" />
+      <div className="w-full flex flex-col h-full items-center">
+        <button className="bg-light text-main font-bold text-sm w-full rounded-lg p-2">Add exercise</button>  
       </div>
     </main>
   )

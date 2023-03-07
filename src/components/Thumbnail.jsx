@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 export default function Thumbnail(props) {
   const { img, content, title, id } = props;
-  console.log(id)
 
   return (
     <Link to={`/articles/${id}`} className='rounded-main mt-4 h-32 block'>

@@ -32,14 +32,18 @@ export default function Article() {
   )}
 
   return(
-    <div className="flex flex-col p-4 h-main overflow-scroll">
-      <h1 className='text-4xl font-bold mb-4'>{article.properties.Name.title[0].plain_text}</h1>
-      <div className="w-full flex justify-center mb-4">
-        <img src={article.properties.Image.files[0].name} alt="cover image" srcSet="" className='max-w-3xl' />  
-      </div>
-      <p dangerouslySetInnerHTML={{__html: renderRichText(article.properties && article.properties.Content.rich_text)}} />
+    <main className="flex flex-col p-4 h-main overflow-scroll items-center w-full">
+      <article className='lg:max-w-3xl w-full'>
+        <h1 className='text-4xl font-bold mb-4'>{article.properties.Name.title[0].plain_text}</h1>
+        <div className="w-full flex items-center mb-4 flex-col">
+          <img src={article.properties.Image.files[0].name} alt="cover image" srcSet="" className='max-w-3xl' />
+          <p className='text-slate-500 text-xs mb-0'>Image from Unsplash</p>  
+        </div>
+        <p dangerouslySetInnerHTML={{__html: renderRichText(article.properties && article.properties.Content.rich_text)}} />
+      </article>
       
-    </div>
+      
+    </main>
   )
   
 }

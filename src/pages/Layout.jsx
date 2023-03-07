@@ -17,13 +17,13 @@ export default function Layout() {
         <nav className="">
           {path === '/' ?
           <ul className='flex justify-between items-center mx-4 my-2'>
-            <li><Link to="/calendar" ><CalendarCheck size={32} color="#177ED7" weight="bold" /></Link></li>
-            <li><Link to="/new-workout"><Plus size={32} color="#177ED7" weight="bold" /></Link></li>
-            <li><Link to="/stats"><ChartLineUp size={32} color="#177ED7" weight="bold" /></Link></li>
+            <li><Link to="/calendar" aria-label='Calendar'><CalendarCheck size={32} color="#177ED7" weight="bold" /></Link></li>
+            <li><Link to="/new-workout" aria-label='New workout'><Plus size={32} color="#177ED7" weight="bold" /></Link></li>
+            <li><Link to="/stats" aria-label='Stats'><ChartLineUp size={32} color="#177ED7" weight="bold" /></Link></li>
           </ul>
           :
           <ul className='flex justify-center items-center mx-4 my-2'>
-            <li><Link to="/"><ArrowCircleLeft size={32} color="#177ED7" weight="bold" /></Link></li>
+            <li><Link to="/" aria-label='Go home' ><ArrowCircleLeft size={32} color="#177ED7" weight="bold" /></Link></li>
           </ul>
           }
         </nav>

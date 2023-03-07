@@ -45,6 +45,7 @@ export default function WorkoutDays(props) {
         for(let i = 0; i < days.length; i++) {
           if(worked.includes(days[i].current.childNodes[0].innerHTML)) {
             days[i].current.classList.add('bg-main')
+            days[i].current.setAttribute('aria-label', 'Worked out')
           };
         }
 
@@ -53,7 +54,7 @@ export default function WorkoutDays(props) {
   }, [])
 
   return(
-    <section className='mb-2'>
+    <section className='mb-2' aria-label="Days worked out this week">
       <h2>Workouts this week</h2>
       <div className='pt-2 pb-6 bg-light rounded-main flex justify-evenly items-center'>
         <div ref={MON} className={`flex justify-center items-center rounded-full bg-gray-300 w-9 h-9`}>

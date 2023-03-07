@@ -66,7 +66,7 @@ export default function Home() {
       {error && error}
       <header className='flex justify-between w-full mb-2'>
         <div className='flex justify-center align-center gap-4'>
-          <img src={`${baseUrl}files/users/${data.id}/${data.avatar}?thumb=200x200`} alt="profile picture" className='w-20 h-20 rounded-full bg-light' />
+          <img src={`${baseUrl}files/users/${data.id}/${data.avatar}?thumb=80x80`} alt="profile picture" className='w-20 h-20 rounded-full bg-light' />
           <h1 className='text-base font-main font-bold w-[13ch] flex justify-center items-center'>Good morning, {data.name.split(' ')[0]}</h1>
         </div>
         <Link to="/settings" aria-label='Settings' className='bg-light rounded-full w-10 h-10 flex items-center justify-center'>

@@ -21,7 +21,8 @@ module.exports = {
         "main": '16px',
       },
       height: {
-        "main": 'calc(100vh - 48px)'
+        "main": 'calc(100vh - 48px)',
+        "main2": 'calc(100% - 64px)',
       },
       width: {
         "template": 'calc(50% - 8px)'

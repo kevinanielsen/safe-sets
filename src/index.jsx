@@ -6,7 +6,7 @@ import { workoutContext } from "./context/workout";
 import { db } from './db';
 import "./index.css";
 import Article from "./pages/Article";
-import Calendar from "./pages/Calendar";
+import History from "./pages/History";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import Login from "./pages/Login";
@@ -56,7 +56,7 @@ export default function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="login" element={<Login />} />
-              <Route path="calendar" element={<Calendar />} />
+              <Route path="history" element={<History />} />
               <Route path="new-workout" element={<NewWorkout />} />
               <Route path="settings" element={<Settings />} />
               <Route path="signup" element={<Signup />} />

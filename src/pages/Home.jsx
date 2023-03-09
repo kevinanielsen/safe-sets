@@ -1,30 +1,18 @@
 import { Gear } from "phosphor-react";
 import { useEffect, useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Articles from "../components/Articles";
 import Progress from "../components/Progress";
 import WorkoutDays from "../components/WorkoutDays";
+import { useUser } from "../context/user";
 import { baseUrl, db } from "../db";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState({});
 
-  const navigate = useNavigate();
-
-  if (!user.id && db.authStore.model) {
-    setUser(db.authStore.model);
-  }
-
-  // Redirect to /login if not logged in
-  useEffect(() => {
-    if (!user.id) {
-      navigate("/login");
-    }
-  }, [user]);
+  const { user } = useUser();
 
   // Fetch user data from database
   useEffect(() => {
@@ -55,11 +43,7 @@ export default function Home() {
   }, [user]);
 
   if (loading) {
-    return (
-      <div className="h-full w-full flex items-center justify-center m-4">
-        <ThreeDots color="#177ed7" />
-      </div>
-    );
+    return <p>Loading...</p>;
   }
 
   return (

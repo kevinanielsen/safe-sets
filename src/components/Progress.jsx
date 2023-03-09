@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { ThreeDots } from 'react-loader-spinner';
 import { Line, LineChart, Tooltip, YAxis } from 'recharts';
 import { db } from '../db';
 

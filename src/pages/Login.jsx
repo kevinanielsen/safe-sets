@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ThreeDots } from 'react-loader-spinner';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useUser } from '../context/user';
 import { db } from '../db';
 
 export default function Login() {
@@ -12,6 +12,8 @@ export default function Login() {
   const [data, setData] = useState();
 
   const navigate = useNavigate();
+
+  const { user, setUser } = useUser();
 
   function handleUsername(e) {
     setUsername(e.target.value);
@@ -37,6 +39,8 @@ export default function Login() {
         setPassword('');
         setUsername('');
         db.authStore.exportToCookie();
+        setUser(db.authStore);
+        console.log(db.authStore)
         toast.success(`Welcome back, ${db.authStore.model.name.split(' ')[0]}`)
       })
       .catch((err) => {
@@ -50,7 +54,7 @@ export default function Login() {
   if(loading) {
     return (
       <main className='flex justify-center items-center h-main w-full'>
-        <ThreeDots color="#177ed7" />
+        <p>Loading...</p>
       </main>
     )
   }

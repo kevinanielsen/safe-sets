@@ -2,11 +2,11 @@ import { } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Template from "../components/Template";
+import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
 
 export default function NewWorkout() {
-  const [user, setUser] = useState({});
   const [error, setError] = useState(null);
   const [templates, setTemplates] = useState([]);
   const navigate = useNavigate();
@@ -22,15 +22,7 @@ export default function NewWorkout() {
     setId,
   } = useWorkout();
 
-  //Check if user is signed in else, navigate to login page
-  if (!user.id && db.authStore.model) {
-    setUser(db.authStore.model);
-  }
-  useEffect(() => {
-    if (!user.id) {
-      navigate("/login");
-    }
-  }, [user]);
+  const { user } = useUser();
 
   //Get list of workout templates/routines
   useEffect(() => {

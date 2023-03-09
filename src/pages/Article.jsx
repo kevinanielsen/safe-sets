@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { ThreeDots } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
 import { renderRichText } from '../util/notion-rich-text-react';
 

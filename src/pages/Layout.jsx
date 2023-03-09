@@ -2,24 +2,20 @@ import {
   ArrowCircleLeft,
   CalendarCheck,
   ChartLineUp,
-  Plus,
+  Plus
 } from "phosphor-react";
+import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { db } from "../db";
+import { useUser } from "../context/user";
 
 export default function Layout() {
   const location = useLocation();
   const path = location.pathname;
-  const [user, setUser] = useState({});
+  const { user } = useUser();
 
   const navigate = useNavigate();
-
-  if (!user.id && db.authStore.model) {
-    setUser(db.authStore.model);
-  }
 
   // Redirect to /login if not logged in
   useEffect(() => {

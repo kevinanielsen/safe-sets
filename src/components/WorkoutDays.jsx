@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { ThreeDots } from 'react-loader-spinner';
 import { db } from '../db';
 
 export default function WorkoutDays(props) {

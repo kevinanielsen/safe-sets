@@ -1,0 +1,19 @@
+{
+  "name": "Safe Sets",
+  "short_name": "SafeSets",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#177ED7",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "../safe-sets.ico",
+      "type": "image/ico", "sizes": "256x256"
+    },
+    {
+      "src": "../safe-sets.png",
+      "type": "image/png", "sizes": "984x984"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ import Settings from "./pages/Settings";
 import Signup from "./pages/Signup";
 import Stats from "./pages/Stats";
 import Workout from "./pages/Workout";
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 export default function App() {
   const [sets, setSets] = useState([]);
@@ -73,3 +74,5 @@ export default function App() {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
+
+serviceWorkerRegistration.register();

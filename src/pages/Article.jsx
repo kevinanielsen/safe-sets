@@ -26,7 +26,7 @@ export default function Article() {
   if(loading) {
   return (
     <div className='h-main w-full flex items-center justify-center'>
-      <ThreeDots color="#177ed7" />
+      <h2>Loading...</h2>
     </div>
   )}
 

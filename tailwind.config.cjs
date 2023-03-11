@@ -1,5 +1,3 @@
-const { Calculator } = require('phosphor-react');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -23,6 +21,7 @@ module.exports = {
       height: {
         "main": 'calc(100vh - 48px)',
         "main2": 'calc(100% - 64px)',
+        "extra": 'calc(100% + 472px)'
       },
       width: {
         "template": 'calc(50% - 8px)'

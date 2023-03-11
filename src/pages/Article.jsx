@@ -35,7 +35,7 @@ export default function Article() {
       <article className='lg:max-w-3xl w-full'>
         <h1 className='text-4xl font-bold mb-4'>{article.properties.Name.title[0].plain_text}</h1>
         <div className="w-full flex items-center mb-4 flex-col">
-          <img src={article.properties.Image.files[0].name} alt="cover image" srcSet="" className='max-w-3xl' />
+          <img src={article.properties.Image.files[0].name} alt="cover image" srcSet="" className='max-w-3xl w-full' />
           <p className='text-slate-500 text-xs mb-0'>Image from Unsplash</p>  
         </div>
         <p dangerouslySetInnerHTML={{__html: renderRichText(article.properties && article.properties.Content.rich_text)}} />

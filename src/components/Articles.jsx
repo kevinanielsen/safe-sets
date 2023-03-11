@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Thumbnail from './Thumbnail';
+import { Link } from 'react-router-dom';
 
 export default function Articles() {
 
@@ -34,6 +35,7 @@ export default function Articles() {
         />
       )
       })}
+      <Link to="/article" className="underline mt-2 block">Go to all articles</Link>
     </section>
   )
 }

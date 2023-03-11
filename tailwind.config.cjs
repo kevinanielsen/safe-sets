@@ -27,9 +27,6 @@ module.exports = {
       width: {
         "template": 'calc(50% - 8px)'
       },
-      boxShadow: {
-        "main2": '0, 1px, 2px, 0, rgb(0, 0, 0 / 0.3), 0, 2, 6, 2, rgb(0, 0, 0 / 0.15)'
-      }
     },
   },
   plugins: [],

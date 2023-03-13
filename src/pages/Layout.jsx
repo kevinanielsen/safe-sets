@@ -2,7 +2,8 @@ import {
   ArrowCircleLeft,
   CalendarCheck,
   ChartLineUp,
-  Plus
+  Plus,
+  House
 } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -36,7 +37,7 @@ export default function Layout() {
             {path === "/" ? (
               <ul className="flex justify-between items-center mx-4 my-2">
                 <li>
-                  <Link to="/calendar" aria-label="Calendar">
+                  <Link to="/history" aria-label="Calendar">
                     <CalendarCheck size={32} color="#177ED7" weight="bold" />
                   </Link>
                 </li>
@@ -52,10 +53,15 @@ export default function Layout() {
                 </li>
               </ul>
             ) : (
-              <ul className="flex justify-center items-center mx-4 my-2">
+              <ul className="flex justify-evenly items-center mx-4 my-2">
                 <li>
-                  <Link to="/" aria-label="Go home">
+                  <button aria-label="Go back" onClick={() => navigate(-1)}>
                     <ArrowCircleLeft size={32} color="#177ED7" weight="bold" />
+                  </button>
+                </li>
+                <li>
+                  <Link to="/" aria-label="Go back">
+                    <House size={32} color="#177ED7" weight="bold" />
                   </Link>
                 </li>
               </ul>

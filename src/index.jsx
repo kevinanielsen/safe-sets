@@ -25,7 +25,6 @@ export default function App() {
 
   if (!user.id && db.authStore.model) {
     setUser(db.authStore.model);
-
   }
   
   function handleSets(set) {
@@ -37,6 +36,7 @@ export default function App() {
       <workoutContext.Provider
         value={{
           sets,
+          setSets,
           handleSets,
           name,
           setName,

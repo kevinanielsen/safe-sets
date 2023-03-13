@@ -1,13 +1,14 @@
 import { HandbagSimple } from "phosphor-react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Set } from "../components/Set";
+import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
 
 export default function Workout() {
   // Check if user is logged in.
-  const [user, setUser] = useState({});
+  const { user } = useUser();
 
   /* ---------------------- */
 
@@ -15,6 +16,7 @@ export default function Workout() {
     useWorkout();
 
   const params = useParams();
+  const navigate = useNavigate();
   const id = params.id;
 
   const [loading, setLoading] = useState(true);
@@ -51,6 +53,17 @@ export default function Workout() {
       });
   }, []);
 
+  // Lists exercises performed
+  useEffect(() => {
+    setExercises(sets[0]?.map((set) => set.exercise));
+  }, [sets]);
+  
+  useEffect(() => {
+    if (exercises) {
+      setUnique(exercises.filter((item, i, ar) => ar.indexOf(item) === i).filter((item) => item.length != 0));
+    }
+  }, [exercises]);
+  
   function handleEnd() {
     db.collection("workout")
       .update(id, {
@@ -63,17 +76,6 @@ export default function Workout() {
         console.log(res);
       });
   }
-
-  // Lists exercises performed
-  useEffect(() => {
-    setExercises(sets[0]?.map((set) => set.exercise));
-  }, [sets]);
-
-  useEffect(() => {
-    if (exercises) {
-      setUnique(exercises.filter((item, i, ar) => ar.indexOf(item) === i).filter((item) => item.length != 0));
-    }
-  }, [exercises]);
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -105,9 +107,9 @@ export default function Workout() {
               />
             );
           })}
-          <button className="bg-light text-main font-bold text-sm w-full rounded-lg p-2">
+          {active && <button className="bg-light text-main font-bold text-sm w-full rounded-lg p-2">
             Add exercise
-          </button>
+          </button>}
         </div>
         {active && (
           <button

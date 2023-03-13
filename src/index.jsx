@@ -5,6 +5,7 @@ import { userContext } from './context/user';
 import { workoutContext } from "./context/workout";
 import { db } from './db';
 import "./index.css";
+import AllArticles from "./pages/AllArticles";
 import Article from "./pages/Article";
 import History from "./pages/History";
 import Home from "./pages/Home";
@@ -62,6 +63,7 @@ export default function App() {
               <Route path="signup" element={<Signup />} />
               <Route path="stats" element={<Stats />} />
               <Route path="workout/:id" element={<Workout />} />
+              <Route path="article" element={<AllArticles />} />
               <Route path="articles/:id" element={<Article />} />
             </Route>
           </Routes>

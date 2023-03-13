@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { Line, LineChart, Tooltip, YAxis } from 'recharts';
 import { db } from '../db';
 
 export default function Progress() {
@@ -28,7 +27,7 @@ export default function Progress() {
   if(loading) {
     return(
       <div className='h-full w-full flex items-center justify-center m-4'>
-        <ThreeDots color="#177ed7" />
+        <h2>Loading...</h2>
       </div>
     )
   }
@@ -37,10 +36,6 @@ export default function Progress() {
     <section className='mb-2'>
       <h2>Bench press 1RM progression</h2>
       <div ref={ref} className='h-32 bg-light rounded-main'>
-        <LineChart LineChart width={ref.current ? ref.current.offsetWidth : document.body.offsetWidth-32} height={128} data={[]}>
-          <Line type="monotone" dataKey="PR" stroke="#177ed7" />
-          <Tooltip />
-        </LineChart>
       </div>
     </section>
   )

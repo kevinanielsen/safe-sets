@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Thumbnail from './Thumbnail';
+import { Link } from 'react-router-dom';
 
 export default function Articles() {
 
@@ -11,7 +12,6 @@ export default function Articles() {
       .then((response) => response.json())
       .then((data) => setArticles(data.results))
       .finally(() => setLoading(false))
-    
   }, [])
 
   if(loading) {
@@ -23,7 +23,8 @@ export default function Articles() {
   return(
     <section>
       <h2>Recent articles</h2>
-      {articles[0] && articles.map((article) => {
+      {articles[0] && articles.slice(0, 5).map((article) => {
+        
       return(
         <Thumbnail 
           key={article.id} 
@@ -34,6 +35,7 @@ export default function Articles() {
         />
       )
       })}
+      <Link to="/article" className="underline mt-2 block">Go to all articles</Link>
     </section>
   )
 }

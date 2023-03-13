@@ -68,9 +68,9 @@ export default function Home() {
           <Gear size="32px" color="#177ed7" />
         </Link>
       </header>
-      <main className="">
+      <main className="h-main">
         <WorkoutDays user={user.id} />
-        {/* <Progress /> */}
+        <Progress />
         <Articles />
       </main>
     </div>

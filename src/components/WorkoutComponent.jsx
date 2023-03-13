@@ -32,7 +32,7 @@ export default function WorkoutComponent(props) {
             count++
           } 
         });
-        return <li key={e.id} className="flex w-full justify-between"><h3>{e.expand.exercise.name}</h3><p>x{count}</p></li>
+        return <li key={e.id} className="flex w-full justify-between"><h3>{e.expand.exercise.name}</h3><p className='text-accent font-bold center'>x{count}</p></li>
       })}
     </ul>
   </Link>

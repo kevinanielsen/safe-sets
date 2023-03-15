@@ -1,4 +1,3 @@
-import { } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Template from "../components/Template";
@@ -11,16 +10,8 @@ export default function NewWorkout() {
   const [templates, setTemplates] = useState([]);
   const navigate = useNavigate();
 
-  const {
-    sets,
-    handleSets,
-    name,
-    setName,
-    startTime,
-    setStartTime,
-    id,
-    setId,
-  } = useWorkout();
+  const { sets, setSets, name, setName, startTime, setStartTime, id, setId } =
+    useWorkout();
 
   const { user } = useUser();
 
@@ -35,12 +26,6 @@ export default function NewWorkout() {
       });
   }, []);
 
-  useEffect(() => {
-    if (id) {
-      navigate(`/workout/${id}`);
-    }
-  });
-
   // Checks database for active workout, if one occures, sets state to fetched data
   useEffect(() => {
     db.collection("workout")
@@ -53,11 +38,19 @@ export default function NewWorkout() {
           const time = new Date(response[0].created);
           setStartTime(time.toLocaleTimeString());
           setName(response[0].name);
-          handleSets(response[0].expand.sets);
+          setSets(response[0].expand.sets);
           setId(response[0].id);
         }
       });
   }, []);
+
+  useEffect(() => {
+    if (id) {
+      navigate(`/workout/${id}`);
+    } else {
+      console.log("No id found", id);
+    }
+  }, [id]);
 
   // Create a new, empty workout and navigate user to the corresponding page
   function handleNewWorkout() {
@@ -66,8 +59,10 @@ export default function NewWorkout() {
         name: "New Workout",
         user: user.id,
         sets: [],
+        active: true,
       })
       .then((response) => {
+        console.log(response);
         navigate(`/workout/${response.id}`);
       });
   }

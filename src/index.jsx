@@ -1,9 +1,9 @@
 import { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { userContext } from './context/user';
+import { userContext } from "./context/user";
 import { workoutContext } from "./context/workout";
-import { db } from './db';
+import { db } from "./db";
 import "./index.css";
 import AllArticles from "./pages/AllArticles";
 import Article from "./pages/Article";
@@ -22,14 +22,14 @@ export default function App() {
   const [name, setName] = useState("");
   const [startTime, setStartTime] = useState("");
   const [id, setId] = useState("");
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
 
   if (!user.id && db.authStore.model) {
     setUser(db.authStore.model);
   }
-  
+
   function handleSets(set) {
-    setSets(prev => [...prev, set]);
+    setSets((prev) => [...prev, set]);
   }
 
   return (
@@ -50,7 +50,7 @@ export default function App() {
         <userContext.Provider
           value={{
             user,
-            setUser
+            setUser,
           }}
         >
           <Routes>

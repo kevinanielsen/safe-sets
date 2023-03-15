@@ -1,14 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
-import { db } from '../db';
+import { useRef, useState } from "react";
+import { db } from "../db";
 
 export default function Progress() {
   const [loading, setLoading] = useState(true);
   const [sets, setSets] = useState(null);
   const [error, setError] = useState(null);
 
-  db.collection('sets').getList(1, 100, {
-    filter: 'exercise = "Bench Press (Barbell)"'
-  })
+  db.collection("sets")
+    .getList(1, 100, {
+      filter: 'exercise = "Bench Press (Barbell)"',
+    })
     .then((response) => {
       setSets(response);
       setError(null);
@@ -19,24 +20,22 @@ export default function Progress() {
     })
     .finally(() => {
       setLoading(false);
-    })
-
+    });
 
   const ref = useRef(null);
 
-  if(loading) {
-    return(
-      <div className='h-full w-full flex items-center justify-center m-4'>
+  if (loading) {
+    return (
+      <div className="h-full w-full flex items-center justify-center m-4">
         <h2>Loading...</h2>
       </div>
-    )
+    );
   }
 
-  return(
-    <section className='mb-2'>
+  return (
+    <section className="mb-2">
       <h2>Bench press 1RM progression</h2>
-      <div ref={ref} className='h-32 bg-light rounded-main'>
-      </div>
+      <div ref={ref} className="h-32 bg-light rounded-main"></div>
     </section>
-  )
+  );
 }

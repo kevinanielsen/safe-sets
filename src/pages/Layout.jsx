@@ -3,7 +3,7 @@ import {
   CalendarCheck,
   ChartLineUp,
   Plus,
-  House
+  House,
 } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";

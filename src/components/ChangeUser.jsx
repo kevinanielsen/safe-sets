@@ -9,22 +9,21 @@ export default function ChangeUser(props) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [closed, setClosed] = useState(false);
-  const [confirm, setConfirm] = useState([false, '']);
 
   const navigate = useNavigate();
   const { user } = useUser();
-  
+
   useEffect(() => {
-    db.collection('users')
-    .authRefresh()
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      console.log(err)
-      console.log(db.authStore)
-    })
-  }, [])
+    db.collection("users")
+      .authRefresh()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(db.authStore);
+      });
+  }, []);
 
   function handleUsername(e) {
     setUsername(e.target.value);
@@ -52,10 +51,10 @@ export default function ChangeUser(props) {
 
   function handleEmailSubmit(e) {
     e.preventDefault();
-    db.collection('users')
+    db.collection("users")
       .requestEmailChange(email)
       .then((res) => {
-        toast('Confirmation email has been sent')
+        toast("Confirmation email has been sent");
       })
       .catch((err) => {
         toast.error(err.data.data.newEmail.message);

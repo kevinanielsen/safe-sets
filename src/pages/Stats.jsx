@@ -1,5 +1,3 @@
 export default function Stats() {
-  return(
-    <h1>Stats</h1>
-  )
+  return <h1>Stats</h1>;
 }

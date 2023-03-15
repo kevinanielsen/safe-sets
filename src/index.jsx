@@ -29,7 +29,7 @@ export default function App() {
   }
   
   function handleSets(set) {
-    setSets((oldArray) => [...oldArray, set]);
+    setSets(prev => [...prev, set]);
   }
 
   return (

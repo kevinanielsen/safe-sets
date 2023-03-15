@@ -1,57 +1,18 @@
-import { useEffect, useState } from 'react';
+import { Check } from 'phosphor-react';
 
 export function Set(props) {
-  const { exercise, sets, exerciseList } = props;
-  const [currentSets, setCurrentSets] = useState([])
-  const [currentExercise, setCurrentExercise] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [actualSets, setActualSets] = useState([]);
+  const { actualSets, set, KG, reps } = props
 
-  useEffect(() => {
-    setCurrentSets(sets[0].reduce((result, set) => {
-      if (set.exercise !== exercise) {
-        result.push(set);
-      }
-      return result;
-    }, []));
-
-    setCurrentExercise(exerciseList.find((e) => {
-      return e.id === exercise;
-    }))
-  }, [props])
-
-  useEffect(() => {
-    setActualSets(sets[0]?.filter((set) => set.exercise == currentExercise?.id))
-    if(actualSets) {
-      return setLoading(false)
-    }
-  }, [sets[0], currentExercise])
-
-  if(!actualSets) {
-    return <p>Loading...</p>
-  }
+  const index = actualSets.findIndex((s) => s == set);
+  const even = index % 2 === 0;
+  let bgColor = even && 'bg-gray-100'
 
   return(
-    <div className='w-full mb-2'>
-      <h2 className='font-bold text-main'>{currentExercise?.name}</h2>
-      <table className='w-full'>
-        <thead className='font-bold border-b-2 border-light'>
-          <tr className=''>
-            <td>#</td>
-            <td>weight</td>
-            <td>reps</td>
-          </tr>
-        </thead>
-        <tbody>
-          {actualSets.map((set) => {
-            return(
-              <tr key={set.id}>
-                <td>{actualSets.findIndex((s) => s == set)}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    </div>
+    <tr key={set.id} className={`${bgColor}`}>
+      <td className="w-1/6">{index}</td>
+      <td className="w-1/6">{KG}</td>
+      <td className="w-1/6">{reps}</td>
+      <td className="w-full flex justify-end my-1"><Check weight="bold" size={24} color="#ffffff" className="bg-transBlack rounded-lg" /></td>
+    </tr>
   )
 }

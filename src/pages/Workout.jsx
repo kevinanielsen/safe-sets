@@ -1,10 +1,11 @@
-import { HandbagSimple } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Set } from "../components/Set";
+import { Exercise } from "../components/Exercise";
+import { ActiveExercise } from "../components/ActiveExercise";
 import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
+import { toast } from "react-toastify";
 
 export default function Workout() {
   // Check if user is logged in.
@@ -12,7 +13,7 @@ export default function Workout() {
 
   /* ---------------------- */
 
-  const { sets, handleSets, name, setName, startTime, setStartTime } =
+  const { sets, handleSets, setSets, name, setName, startTime, setStartTime } =
     useWorkout();
 
   const params = useParams();
@@ -25,9 +26,10 @@ export default function Workout() {
   const [exercises, setExercises] = useState([]);
   const [unique, setUnique] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);
+  const [check, update] = useState(false)
 
-  // Fetch info about current workout and add data to context
   useEffect(() => {
+    // Fetch info about current workout and add data to context
     db.collection("workout")
       .getOne(id, {
         expand: "sets.exercise",
@@ -35,46 +37,62 @@ export default function Workout() {
       .then((response) => {
         setActive(response.active);
         setCreated(new Date(response.created));
-        handleSets(response.expand.sets);
         setName(response.name);
         setStartTime(new Date(response.created).toLocaleTimeString());
       })
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+
+      db.collection('sets')
+        .getFullList(200, {
+          filter: `workout = "${id}"`
+        })
+        .then(response => {
+          setSets(response);
+        })
 
   // Fetch exercise list
+      
+  }, [check]);
+
   useEffect(() => {
     db.collection("exercises")
-      .getFullList()
-      .then((response) => {
-        setExerciseList(response);
-      });
-  }, []);
+        .getFullList()
+        .then(response => {
+          setExerciseList(response);
+        })
+        .catch(e => {
+          toast.error(e.data.exercises.message)
+        })
+  }, [])
 
   // Lists exercises performed
   useEffect(() => {
-    setExercises(sets[0]?.map((set) => set.exercise));
-  }, [sets]);
+    setExercises(sets?.map((set) => set.exercise));
+  }, [sets, check]);
   
+  // Sets the unique exercises in this workout so the sets can be split up into exercises.
   useEffect(() => {
     if (exercises) {
       setUnique(exercises.filter((item, i, ar) => ar.indexOf(item) === i).filter((item) => item.length != 0));
     }
-  }, [exercises]);
+  }, [exercises, check]);
   
   function handleEnd() {
     db.collection("workout")
       .update(id, {
         name: name,
         user: user.id,
-        sets: sets,
         active: false,
       })
-      .then((res) => {
+      .then(res => {
         console.log(res);
       });
+  }
+
+  function callUpdate() {
+    update(!check)
   }
 
   if (loading) {
@@ -97,16 +115,31 @@ export default function Workout() {
       </div>
       <div className="flex items-center flex-col justify-between h-main2 mb-6">
         <div className="w-full flex flex-col items-center">
-          {unique?.map((set) => {
+          {active && unique?.map((set) => {
             return (
-              <Set
+              <ActiveExercise
                 key={set}
                 exercise={set}
                 sets={sets}
                 exerciseList={exerciseList}
+                workoutId={id}
+                callUpdate={callUpdate}
               />
             );
           })}
+          {!active && unique?.map((set) => {
+            return (
+              <Exercise
+                key={set}
+                exercise={set}
+                sets={sets}
+                exerciseList={exerciseList}
+                workoutId={id}
+                callUpdate={callUpdate}
+              />
+            );
+          })}
+          <hr className="mb-2 border-b-2 w-full border-light" />
           {active && <button className="bg-light text-main font-bold text-sm w-full rounded-lg p-2">
             Add exercise
           </button>}
@@ -114,7 +147,7 @@ export default function Workout() {
         {active && (
           <button
             onClick={handleEnd}
-            className="bg-green-300 text-green-700 font-bold text-sm w-full rounded-lg p-2"
+            className="bg-green-300 text-green-700 font-bold text-sm rounded-lg p-2 w-full"
           >
             End workout
           </button>

@@ -19,7 +19,7 @@ export default function Settings() {
   }
 
   return (
-    <main className="m-4">
+    <main className="m-4 mb-12">
       <h1 className="font-bold font-main text-xl">Settings</h1>
       <button
         className="font-bold font-main text-main text-base p-4 mt-4 w-full text-left bg-light rounded-main"

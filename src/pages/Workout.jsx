@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Exercise } from "../components/Exercise";
+import { toast } from "react-toastify";
 import { ActiveExercise } from "../components/ActiveExercise";
+import { Exercise } from "../components/Exercise";
 import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
-import { toast } from "react-toastify";
 
 export default function Workout() {
   // Check if user is logged in.
@@ -102,7 +102,7 @@ export default function Workout() {
   }
 
   return (
-    <main className="flex flex-col m-4 h-main">
+    <main className="flex flex-col m-4 mb-8">
       <div>
         <div className="flex justify-between mb-4">
           {active ? (
@@ -157,7 +157,7 @@ export default function Workout() {
         {active && (
           <button
             onClick={handleEnd}
-            className="bg-green-300 text-green-700 font-bold text-sm rounded-lg p-2 w-full"
+            className="mt-4 bg-green-300 text-green-700 font-bold text-sm rounded-lg p-2 w-full"
           >
             End workout
           </button>

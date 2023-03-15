@@ -44,7 +44,7 @@ export default function History() {
   }
 
   return (
-    <main className="m-4 flex justify-center items-center overflow-scroll">
+    <main className="m-4 flex justify-center items-center">
       <div className="flex flex-col w-full sm:w-3/4 mb-16">
         <h1 className="text-xl font-bold mb-4">
           Workout history of {user.name.split(" ")[0]}

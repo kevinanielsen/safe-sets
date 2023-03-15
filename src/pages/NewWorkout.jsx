@@ -30,7 +30,7 @@ export default function NewWorkout() {
   useEffect(() => {
     db.collection("workout")
       .getFullList(200, {
-        filter: `active = true`,
+        filter: `active = true && user = "${user.id}"`,
         expand: "sets.exercise",
       })
       .then((response) => {
@@ -41,7 +41,10 @@ export default function NewWorkout() {
           setSets(response[0].expand.sets);
           setId(response[0].id);
         }
-      });
+      })
+      .catch(e => {
+        console.log(e.data)
+      })
   }, []);
 
   useEffect(() => {
@@ -68,7 +71,7 @@ export default function NewWorkout() {
   }
 
   return (
-    <main className="m-4">
+    <main className="m-4 mb-12">
       <h1 className="font-bold font-main text-xl">New workout</h1>
       <button
         className="font-bold font-main text-main text-base p-4 my-4 w-full text-left bg-light rounded-main"

@@ -47,7 +47,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col justify-center m-4">
+    <div className="flex flex-col justify-center m-4 mb-16">
       {error && error}
       <header className="flex justify-between w-full mb-2">
         <div className="flex justify-center align-center gap-4">
@@ -68,7 +68,7 @@ export default function Home() {
           <Gear size="32px" color="#177ed7" />
         </Link>
       </header>
-      <main className="h-main">
+      <main className="">
         <WorkoutDays user={user.id} />
         <Progress />
         <Articles />

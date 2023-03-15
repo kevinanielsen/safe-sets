@@ -32,7 +32,7 @@ export default function Article() {
   }
 
   return (
-    <main className="flex flex-col p-4 h-main overflow-scroll items-center w-full">
+    <main className="flex flex-col p-4 items-center w-full mb-16">
       <article className="lg:max-w-3xl w-full">
         <h1 className="text-4xl font-bold mb-4">
           {article.properties.Name.title[0].plain_text}

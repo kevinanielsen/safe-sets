@@ -92,7 +92,8 @@ export default function Workout() {
         active: false,
       })
       .then((res) => {
-        console.log(res);
+        callUpdate();
+        toast.success('Successfully saved workout')
       });
   }
 
@@ -118,7 +119,7 @@ export default function Workout() {
               <input
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.value)}
+                onChange={(e) => setName(e.target.value)}
                 className="text-xl font-bold text-gray-500"
               />
             ) : (
@@ -168,13 +169,13 @@ export default function Workout() {
           </div>
           {active && (
             <button
-              onClick={handleChange}
+              onClick={handleEnd}
               className="mt-4 bg-green-300 text-green-700 font-bold text-sm rounded-lg p-2 w-full"
             >
               End workout
             </button>
           )}
-          {show && <ChooseExercise exerciseList={exerciseList} handleChange={handleChange} />}
+          {show && <ChooseExercise workoutId={id} callUpdate={callUpdate} exerciseList={exerciseList} handleChange={handleChange} />}
         </div>
       </div>
     </main>

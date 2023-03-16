@@ -32,8 +32,8 @@ export default function Layout() {
       <ToastContainer />
       <Outlet />
       {pathSum === 2 && (
-        <footer className="h-12 w-screen bg-light fixed bottom-0 left-0 right-0">
-          <nav className="">
+        <footer className="h-12 w-screen bg-light fixed bottom-0 left-0 right-0 flex justify-center min-w-[322px]">
+          <nav className="lg:w-3/4 w-full max-w-4xl">
             {path === "/" ? (
               <ul className="flex justify-between items-center mx-4 my-2">
                 <li>

@@ -47,32 +47,36 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col justify-center m-4 mb-16">
-      {error && error}
-      <header className="flex justify-between w-full mb-2">
-        <div className="flex justify-center align-center gap-4">
-          <img
-            src={`${baseUrl}files/users/${data.id}/${data.avatar}?thumb=80x80`}
-            alt="profile picture"
-            className="w-20 h-20 rounded-full bg-light bg-[length:100px_100px]"
-          />
-          <h1 className="text-base font-main font-bold w-[13ch] flex justify-center items-center">
-            Good morning, {data.name.split(" ")[0]}
-          </h1>
-        </div>
-        <Link
-          to="/settings"
-          aria-label="Settings"
-          className="bg-light rounded-full w-10 h-10 flex items-center justify-center"
-        >
-          <Gear size="32px" color="#177ed7" />
-        </Link>
-      </header>
-      <main className="">
-        <WorkoutDays user={user.id} />
-        <Progress />
-        <Articles />
-      </main>
+
+    
+    <div className="flex flex-col p-4 mb-8 w-full items-center">
+      <div className="lg:w-3/4 w-full max-w-4xl min-w-[322px]">
+        {error && error}
+        <header className="flex justify-between w-full mb-2">
+          <div className="flex justify-center align-center gap-4">
+            <img
+              src={`${baseUrl}files/users/${data.id}/${data.avatar}?thumb=80x80`}
+              alt="profile picture"
+              className="w-20 h-20 rounded-full bg-light bg-[length:100px_100px]"
+            />
+            <h1 className="text-base font-main font-bold w-[13ch] flex justify-center items-center">
+              Good morning, {data.name.split(" ")[0]}
+            </h1>
+          </div>
+          <Link
+            to="/settings"
+            aria-label="Settings"
+            className="bg-light rounded-full w-10 h-10 flex items-center justify-center"
+          >
+            <Gear size="32px" color="#177ed7" />
+          </Link>
+        </header>
+        <main className="">
+          <WorkoutDays user={user.id} />
+          <Progress />
+          <Articles />
+        </main>
+      </div>
     </div>
   );
 }

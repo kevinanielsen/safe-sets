@@ -8,7 +8,7 @@ export function ActiveSet(props) {
   const { actualSets, set, KG, reps, done, workoutId } = props;
   const { id } = set;
   const { user } = useUser();
-
+  
   // States
   const [weight, setWeight] = useState(KG);
   const [repCount, setRepCount] = useState(reps);
@@ -26,7 +26,6 @@ export function ActiveSet(props) {
         done: !finished,
       })
       .then((response) => {
-        console.log(response);
       })
       .catch((error) => {
         toast.error("Lost connection to database");

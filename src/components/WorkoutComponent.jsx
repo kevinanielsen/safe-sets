@@ -1,18 +1,29 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { db } from "../db";
 
 export default function WorkoutComponent(props) {
   const [unique, setUnique] = useState([]);
+  const [sets, setSets] = useState([])
 
   const { workout } = props;
   const { id, name, created } = workout;
-  const { sets } = workout.expand;
 
   useEffect(() => {
-    const e = sets.map((item) => item.expand.exercise);
-
-    setUnique([...new Set(e.map((item) => item.id))]);
-  }, []);
+    db.collection('sets')
+      .getFullList({
+        '$cancelKey': id,
+        filter: `workout = "${id}"`,
+        expand: `exercise`
+      })
+      .then((response) => {
+        setSets(response)
+        setUnique([...new Set(response.map((item) => item.exercise))]);
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
+  }, [])
 
   return (
     <Link
@@ -26,7 +37,9 @@ export default function WorkoutComponent(props) {
       <hr />
       <ul>
         {unique?.map((item) => {
-          const e = sets.find((value) => value.expand.exercise.id === item);
+          const e = sets.find((value) => {
+            return value.exercise === item
+          })
           let count = 0;
           sets.forEach((value) => {
             if (value.expand.exercise.id === item) {

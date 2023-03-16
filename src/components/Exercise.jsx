@@ -52,7 +52,6 @@ export function Exercise(props) {
         </thead>
         <tbody className="text-center font-bold">
           {actualSets.map((set) => {
-            // console.log(set)
             return (
               <DoneSet
                 key={set.id}

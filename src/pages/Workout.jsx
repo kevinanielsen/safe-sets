@@ -6,6 +6,8 @@ import { Exercise } from "../components/Exercise";
 import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
+import { ChooseExercise } from "../components/ChooseExercise";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 export default function Workout() {
   // Check if user is logged in.
@@ -26,6 +28,7 @@ export default function Workout() {
   const [unique, setUnique] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);
   const [check, update] = useState(false);
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     // Fetch info about current workout and add data to context
@@ -93,6 +96,11 @@ export default function Workout() {
       });
   }
 
+  function handleChange() {
+    {show ? enableBodyScroll(document) : disableBodyScroll(document)}
+    setShow(!show)
+  }
+
   function callUpdate() {
     update(!check);
   }
@@ -102,66 +110,72 @@ export default function Workout() {
   }
 
   return (
-    <main className="flex flex-col m-4 mb-8">
-      <div>
-        <div className="flex justify-between mb-4">
-          {active ? (
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.value)}
-              className="text-xl font-bold text-gray-500"
-            />
-          ) : (
-            <h1 className="text-xl font-bold">{name}</h1>
-          )}
-          <p className="flex justify-end grow">{created.toDateString()}</p>
+    <main className="flex flex-col p-4 mb-8 w-full items-center">
+      <div className="sm:w-3/4 w-full max-w-4xl">
+        <div>
+          <div className="flex justify-between mb-4">
+            {active ? (
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.value)}
+                className="text-xl font-bold text-gray-500"
+              />
+            ) : (
+              <h1 className="text-xl font-bold">{name}</h1>
+            )}
+            <p className="flex justify-end grow">{created.toDateString()}</p>
+          </div>
+          <hr className="border-light border mb-4" />
         </div>
-        <hr className="border-light border mb-4" />
-      </div>
-      <div className="flex items-center flex-col justify-between h-main2 mb-6">
-        <div className="w-full flex flex-col items-center">
-          {active &&
-            unique?.map((set) => {
-              return (
-                <ActiveExercise
-                  key={set}
-                  exercise={set}
-                  sets={sets}
-                  exerciseList={exerciseList}
-                  workoutId={id}
-                  callUpdate={callUpdate}
-                />
-              );
-            })}
-          {!active &&
-            unique?.map((set) => {
-              return (
-                <Exercise
-                  key={set}
-                  exercise={set}
-                  sets={sets}
-                  exerciseList={exerciseList}
-                  workoutId={id}
-                  callUpdate={callUpdate}
-                />
-              );
-            })}
-          {active && <hr className="mb-2 border-b-2 w-full border-light" />}
+        <div className="flex items-center flex-col justify-between h-main2 mb-6">
+          <div className="w-full flex flex-col items-center">
+            {active &&
+              unique?.map((set) => {
+                return (
+                  <ActiveExercise
+                    key={set}
+                    exercise={set}
+                    sets={sets}
+                    exerciseList={exerciseList}
+                    workoutId={id}
+                    callUpdate={callUpdate}
+                  />
+                );
+              })}
+            {!active &&
+              unique?.map((set) => {
+                return (
+                  <Exercise
+                    key={set}
+                    exercise={set}
+                    sets={sets}
+                    exerciseList={exerciseList}
+                    workoutId={id}
+                    callUpdate={callUpdate}
+                  />
+                );
+              })}
+            {active && <hr className="mb-2 border-b-2 w-full border-light" />}
+            {active && (
+              <button
+                onClick={handleChange}
+                className="bg-light text-main font-bold text-sm w-full rounded-lg p-2"
+              >
+                Add exercise
+              </button>
+            )}
+          </div>
           {active && (
-            <button className="bg-light text-main font-bold text-sm w-full rounded-lg p-2">
-              Add exercise
+            <button
+              onClick={handleChange}
+              className="mt-4 bg-green-300 text-green-700 font-bold text-sm rounded-lg p-2 w-full"
+            >
+              End workout
             </button>
           )}
+          {show && <ChooseExercise exerciseList={exerciseList} handleChange={handleChange} />}
         </div>
-        {active && (
-          <button
-            onClick={handleEnd}
-            className="mt-4 bg-green-300 text-green-700 font-bold text-sm rounded-lg p-2 w-full"
-          >
-            End workout
-          </button>
-        )}
       </div>
     </main>
   );

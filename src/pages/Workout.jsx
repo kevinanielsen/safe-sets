@@ -7,7 +7,6 @@ import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
 import { ChooseExercise } from "../components/ChooseExercise";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 export default function Workout() {
   // Check if user is logged in.
@@ -98,7 +97,6 @@ export default function Workout() {
   }
 
   function handleChange() {
-    {show ? enableBodyScroll(document) : disableBodyScroll(document)}
     setShow(!show)
   }
 

@@ -80,10 +80,11 @@ export default function NewWorkout() {
         Start empty workout
       </button>
       <h1 className="font-bold font-main text-xl">Templates</h1>
-      <div className="mt-4 flex flex-wrap gap-4 justify-between">
-        {templates.map((template) => (
+      <div className="mt-4 flex flex-wrap gap-4 justify-center">
+        {/* {templates.map((template) => (
           <Template key={template.id} workout={template} />
-        ))}
+        ))} */}
+        <h2 className="font-bold text-lg bg-main px-4 py-2 rounded-lg text-white">Coming Soon!</h2>
       </div>
     </main>
   );

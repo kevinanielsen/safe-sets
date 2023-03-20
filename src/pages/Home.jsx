@@ -1,6 +1,7 @@
 import { Gear } from "phosphor-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Articles from "../components/Articles";
 import Progress from "../components/Progress";
 import WorkoutDays from "../components/WorkoutDays";
@@ -13,6 +14,12 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   const { user } = useUser();
+
+  if (!user.id) {
+    toast.error('You must be logged in!')
+    return <Navigate to="/" replace />;
+  }
+
 
   // Fetch user data from database
   useEffect(() => {

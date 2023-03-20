@@ -7,6 +7,7 @@ import { db } from "./db";
 import "./index.css";
 import AllArticles from "./pages/AllArticles";
 import Article from "./pages/Article";
+import FrontPage from "./pages/FrontPage";
 import History from "./pages/History";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
@@ -55,14 +56,15 @@ export default function App() {
         >
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
+              <Route index element={<FrontPage/> }/>
+              <Route path="home" element={<Home />} /> {/* Private */}
               <Route path="login" element={<Login />} />
-              <Route path="history" element={<History />} />
-              <Route path="new-workout" element={<NewWorkout />} />
-              <Route path="settings" element={<Settings />} />
+              <Route path="history" element={<History />} /> {/* Private */}
+              <Route path="new-workout" element={<NewWorkout />} /> {/* Private */}
+              <Route path="settings" element={<Settings />} /> {/* Private */}
               <Route path="signup" element={<Signup />} />
-              <Route path="stats" element={<Stats />} />
-              <Route path="workout/:id" element={<Workout />} />
+              <Route path="stats" element={<Stats />} /> {/* Private */}
+              <Route path="workout/:id" element={<Workout />} /> {/* Private */}
               <Route path="article" element={<AllArticles />} />
               <Route path="articles/:id" element={<Article />} />
             </Route>

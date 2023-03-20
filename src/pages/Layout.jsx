@@ -5,33 +5,23 @@ import {
   Plus,
   House,
 } from "phosphor-react";
-import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useUser } from "../context/user";
 
 export default function Layout() {
   const location = useLocation();
   const path = location.pathname;
-  const { user } = useUser();
 
   const navigate = useNavigate();
 
-  // Redirect to /login if not logged in
-  useEffect(() => {
-    if (!user.id && (path !== "/login" || path !== "/signup")) {
-      navigate("/login");
-    }
-  }, [user]);
-
-  const pathSum = (path !== "/login") + (path !== "/signup");
+  const pathSum = (path !== "/login") + (path !== "/signup") + (path !== "/");
 
   return (
     <>
       <ToastContainer />
       <Outlet />
-      {pathSum === 2 && (
+      {pathSum === 3 && (
         <footer className="h-12 w-screen bg-light fixed bottom-0 left-0 right-0 flex justify-center min-w-[322px]">
           <nav className="lg:w-3/4 w-full max-w-4xl">
             {path === "/" ? (

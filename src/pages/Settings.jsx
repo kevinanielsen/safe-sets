@@ -2,12 +2,19 @@ import { useState } from "react";
 import ChangeUser from "../components/ChangeUser";
 import { useUser } from "../context/user";
 import { db } from "../db";
+import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Settings() {
   const [show, setShow] = useState(false);
   const [change, setChange] = useState("");
 
   const { user, setUser } = useUser();
+
+  if (!user.id) {
+    toast.error('You must be logged in!')
+    return <Navigate to="/" replace />;
+  }
 
   function handleSignout() {
     db.authStore.clear();

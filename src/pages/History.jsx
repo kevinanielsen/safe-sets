@@ -3,6 +3,8 @@ import WorkoutComponent from "../components/WorkoutComponent";
 import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
+import { Navigate } from 'react-router-dom'
+import { toast } from "react-toastify";
 
 export default function History() {
   const { user } = useUser();
@@ -11,6 +13,11 @@ export default function History() {
   const [error, setError] = useState(true);
 
   const { setName, setStartTime, setId, setSets } = useWorkout();
+
+  if (!user.id) {
+    toast.error('You must be logged in!')
+    return <Navigate to="/" replace />;
+  }
 
   useEffect(() => {
     setName("");

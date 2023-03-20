@@ -4,20 +4,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db } from "../db";
 
-const resizeFile = (file) => new Promise(resolve => {
-  Resizer.imageFileResizer(
-    file, 
-    500, 
-    500, 
-    'WEBP', 
-    100, 
-    0,
-    uri => {
-      resolve(uri);
-    }, 
-    'blob'
-  );
-});
+const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      500,
+      500,
+      "WEBP",
+      100,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      "blob"
+    );
+  });
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);
@@ -59,11 +60,11 @@ export default function Signup() {
         toast.success("Account created!");
       })
       .catch((err) => {
-        console.log(err.data)
-        toast.error(err.data.username?.message)
-        toast.error(err.data.password?.message)
-        toast.error(err.data.avatar?.message)
-        toast.error(err.data.email?.message)
+        console.log(err.data);
+        toast.error(err.data.username?.message);
+        toast.error(err.data.password?.message);
+        toast.error(err.data.avatar?.message);
+        toast.error(err.data.email?.message);
         setError(err.message);
         setLoading(false);
       });
@@ -88,12 +89,10 @@ export default function Signup() {
 
   function handleFileInput(e) {
     for (let file of fileInput.current.files) {
-      resizeFile(file)
-        .then((res) => {
-          console.log(res);
-          formData.append("avatar", res);
-        })
-      
+      resizeFile(file).then((res) => {
+        console.log(res);
+        formData.append("avatar", res);
+      });
     }
   }
 

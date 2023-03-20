@@ -7,10 +7,16 @@ import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
 import { ChooseExercise } from "../components/ChooseExercise";
+import { Navigate } from "react-router-dom";
 
 export default function Workout() {
   // Check if user is logged in.
   const { user } = useUser();
+
+  if (!user.id) {
+    toast.error('You must be logged in!')
+    return <Navigate to="/" replace />;
+  }
 
   /* ---------------------- */
 

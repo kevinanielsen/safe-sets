@@ -4,6 +4,8 @@ import Template from "../components/Template";
 import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
+import { Navigate } from 'react-router-dom'
+import { toast } from "react-toastify";
 
 export default function NewWorkout() {
   const [error, setError] = useState(null);
@@ -14,6 +16,11 @@ export default function NewWorkout() {
     useWorkout();
 
   const { user } = useUser();
+
+  if (!user.id) {
+    toast.error('You must be logged in!')
+    return <Navigate to="/" replace />;
+  }
 
   //Get list of workout templates/routines
   useEffect(() => {

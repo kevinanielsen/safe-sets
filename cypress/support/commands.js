@@ -23,3 +23,15 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login ', (username, pass ) => {
+  cy.visit('http://localhost:5173/login');
+
+  cy.get('input[name=username]').type(username);
+  cy.get('input[name=password').type(pass);
+  cy.get('input[type=submit]').click(); 
+
+  cy.get('.Toastify').children()
+  .should('contain', 'Welcome back')
+  .and('be.visible');
+})

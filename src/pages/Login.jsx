@@ -41,7 +41,6 @@ export default function Login() {
         setUsername("");
         db.authStore.exportToCookie();
         setUser(db.authStore);
-        console.log(db.authStore);
         toast.success(`Welcome back, ${db.authStore.model.name.split(" ")[0]}`);
       })
       .catch((err) => {

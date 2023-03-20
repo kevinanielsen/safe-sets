@@ -24,7 +24,7 @@ export default function Layout() {
       {pathSum === 3 && (
         <footer className="h-12 w-screen bg-light fixed bottom-0 left-0 right-0 flex justify-center min-w-[322px]">
           <nav className="lg:w-3/4 w-full max-w-4xl">
-            {path === "/" ? (
+            {path === "/home" ? (
               <ul className="flex justify-between items-center mx-4 my-2">
                 <li>
                   <Link to="/history" aria-label="Calendar">
@@ -50,7 +50,7 @@ export default function Layout() {
                   </button>
                 </li>
                 <li>
-                  <Link to="/" aria-label="Go back">
+                  <Link to="/home" aria-label="Go to homepage">
                     <House size={32} color="#177ED7" weight="bold" />
                   </Link>
                 </li>

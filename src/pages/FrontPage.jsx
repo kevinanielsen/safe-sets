@@ -13,7 +13,7 @@ export default function FrontPage() {
             <li><Link to="/home">Homepage</Link></li>
             <li><Link to="/history">Workout History</Link></li>
             <li><Link to="/stats">Stats</Link></li>
-            <li><Link to="/stats">New Workout</Link></li>
+            <li><Link to="/new-workout">New Workout</Link></li>
           </ul>
 
           {!user.id && (

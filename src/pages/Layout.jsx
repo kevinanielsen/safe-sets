@@ -27,17 +27,17 @@ export default function Layout() {
             {path === "/home" ? (
               <ul className="flex justify-between items-center mx-4 my-2">
                 <li>
-                  <Link to="/history" aria-label="Calendar">
+                  <Link id="history" to="/history" aria-label="Calendar">
                     <CalendarCheck size={32} color="#177ED7" weight="bold" />
                   </Link>
                 </li>
                 <li>
-                  <Link to="/new-workout" aria-label="New workout">
+                  <Link id="new-workout" to="/new-workout" aria-label="New workout">
                     <Plus size={32} color="#177ED7" weight="bold" />
                   </Link>
                 </li>
                 <li>
-                  <Link to="/stats" aria-label="Stats">
+                  <Link id="stats" to="/stats" aria-label="Stats">
                     <ChartLineUp size={32} color="#177ED7" weight="bold" />
                   </Link>
                 </li>
@@ -45,12 +45,12 @@ export default function Layout() {
             ) : (
               <ul className="flex justify-evenly items-center mx-4 my-2">
                 <li>
-                  <button aria-label="Go back" onClick={() => navigate(-1)}>
+                  <button id="go-back" aria-label="Go back" onClick={() => navigate(-1)}>
                     <ArrowCircleLeft size={32} color="#177ED7" weight="bold" />
                   </button>
                 </li>
                 <li>
-                  <Link to="/home" aria-label="Go to homepage">
+                  <Link id="home" to="/home" aria-label="Go to homepage">
                     <House size={32} color="#177ED7" weight="bold" />
                   </Link>
                 </li>

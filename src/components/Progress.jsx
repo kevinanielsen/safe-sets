@@ -6,21 +6,21 @@ export default function Progress() {
   const [sets, setSets] = useState(null);
   const [error, setError] = useState(null);
 
-  db.collection("sets")
-    .getList(1, 100, {
-      filter: 'exercise = "Bench Press (Barbell)"',
-    })
-    .then((response) => {
-      setSets(response);
-      setError(null);
-    })
-    .catch((err) => {
-      setError(err.message);
-      setSets(null);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
+  // db.collection("sets")
+  //   .getList(1, 100, {
+  //     filter: 'exercise = "Bench Press (Barbell)"',
+  //   })
+  //   .then((response) => {
+  //     setSets(response);
+  //     setError(null);
+  //   })
+  //   .catch((err) => {
+  //     setError(err.message);
+  //     setSets(null);
+  //   })
+  //   .finally(() => {
+  //     setLoading(false);
+  //   });
 
   const ref = useRef(null);
 

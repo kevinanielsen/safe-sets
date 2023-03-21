@@ -15,12 +15,11 @@ export default function FrontPage() {
             <li><Link to="/stats">Stats</Link></li>
             <li><Link to="/new-workout">New Workout</Link></li>
           </ul>
-
-          {!user.id && (
-            <div>
-              <h2>It seems like you're not logged in! <Link to="/login" className="underline text-main">log in</Link> or <Link to="/signup" className="underline text-main">create an account</Link> to get access to all features!</h2>
-            </div>
-          )}
+          <div id="guest">
+            {!user.id && (
+                <h2>It seems like you're not logged in! <Link to="/login" className="underline text-main">log in</Link> or <Link to="/signup" className="underline text-main">create an account</Link> to get access to all features!</h2>
+            )}
+          </div>
         </nav>
       </header>
       <main>

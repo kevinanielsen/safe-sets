@@ -12,6 +12,7 @@ import History from "./pages/History";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import Login from "./pages/Login";
+import Lost from "./pages/Lost";
 import NewWorkout from "./pages/NewWorkout";
 import Settings from "./pages/Settings";
 import Signup from "./pages/Signup";
@@ -67,6 +68,7 @@ export default function App() {
               <Route path="workout/:id" element={<Workout />} /> {/* Private */}
               <Route path="article" element={<AllArticles />} />
               <Route path="articles/:id" element={<Article />} />
+              <Route path="*" element={<Lost />} />
             </Route>
           </Routes>
         </userContext.Provider>

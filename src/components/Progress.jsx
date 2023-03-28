@@ -1,17 +1,24 @@
 import { useState, useEffect } from "react";
 import { db } from "../db";
 import { findHighestRM } from "../util/findHighestRM";
-import { LineChart, Line, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
-import { useUser } from '../context/user';
+import {
+  LineChart,
+  Line,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { useUser } from "../context/user";
 
 export default function Progress() {
   const [loading, setLoading] = useState(true);
   const [sets, setSets] = useState(null);
   const [error, setError] = useState(null);
   const [records, setRecords] = useState([]);
-  const [data, setData] = useState([]); 
+  const [data, setData] = useState([]);
 
-  const { user } = useUser()
+  const { user } = useUser();
 
   useEffect(() => {
     db.collection("sets")
@@ -30,22 +37,25 @@ export default function Progress() {
       .finally(() => {
         setLoading(false);
       });
-      
   }, []);
 
   useEffect(() => {
-    sets && setRecords(findHighestRM(sets))
-  }, [sets])
+    sets && setRecords(findHighestRM(sets));
+  }, [sets]);
 
   useEffect(() => {
-    setData(records?.map(record => {
-      const date = new Date(record.rm.set.created).toDateString();
-      return {
-        rm: Math.round(record.rm.rm * 100) / 100,
-        date: date
-      }
-    }))
-  }, [records])
+    setData(
+      records?.map((record) => {
+        const date = new Date(record.rm.set.created)
+          .toLocaleString()
+          .split(" ")[0];
+        return {
+          rm: Math.round(record.rm.rm * 100) / 100,
+          date: date,
+        };
+      })
+    );
+  }, [records]);
 
   if (loading) {
     return (
@@ -53,9 +63,16 @@ export default function Progress() {
         <h2>Loading...</h2>
       </div>
     );
-  }  
+  }
 
-  console.log(data)
+  const findTicks = () => {
+    let arr = [];
+    for(let v in data) {
+      arr.push(data[v].rm);
+    }
+    console.log(arr)
+    return arr;
+  }
 
   return (
     <section className="mb-2">
@@ -64,12 +81,16 @@ export default function Progress() {
         <ResponsiveContainer>
           <LineChart data={data}>
             <Tooltip />
+            <YAxis dataKey="rm" 
+              domain={['dataMin', 'dataMax']}
+              hide={true}
+            />
             <XAxis dataKey="date" />
             <Line type="monotone" dataKey="rm" stroke="#177ED7" />
           </LineChart>
         </ResponsiveContainer>
-        
-      {/* {records?.map((record) => {
+
+        {/* {records?.map((record) => {
         return <h3>{Math.round(record.rm.rm * 100) / 100}</h3>
       })} */}
       </div>

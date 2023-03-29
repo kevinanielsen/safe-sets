@@ -11,7 +11,7 @@ export default function FrontPage() {
         <Barbell size={48} color="#ffffff" weight="bold" />
         <h1 className="font-extrabold text-4xl">Safe Sets</h1>
       </header>
-      <main className="flex flex-col justify-center items-center p-4">
+      <main className="flex flex-col justify-center items-center p-4 w-full">
         <div className="flex justify-center items-center py-8 text-center" id="banner">
           <h2 className="text-xl md:text-2xl font-bold">A one stop shop for all your workout tracking needs.</h2>
         </div>

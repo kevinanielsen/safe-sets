@@ -18,16 +18,6 @@ export function ActiveExercise(props) {
   const { user } = useUser();
 
   useEffect(() => {
-    // Sets the sets that are relevant
-    setCurrentSets(
-      sets.reduce((result, set) => {
-        if (set.exercise !== exercise) {
-          result.push(set);
-        }
-        return result;
-      }, [])
-    );
-
     // Sets the current exercise
     setCurrentExercise(
       exerciseList.find((e) => {
@@ -92,6 +82,7 @@ export function ActiveExercise(props) {
                 done={set.done}
                 set={set}
                 workoutId={workoutId}
+                callUpdate={callUpdate}
               />
             );
           })}

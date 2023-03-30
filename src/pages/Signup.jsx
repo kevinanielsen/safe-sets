@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Resizer from "react-image-file-resizer";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -21,13 +21,10 @@ const resizeFile = (file) =>
   });
 
 export default function Signup() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState();
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const password = useRef(null)
+  const username = useRef(null)
+  const name = useRef(null)
+  const email = useRef(null)
 
   const navigate = useNavigate();
 
@@ -39,23 +36,15 @@ export default function Signup() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setLoading(true);
-    formData.append("username", username);
-    formData.append("email", email);
+    formData.append("username", username.current.value);
+    formData.append("email", email.current.value);
     formData.append("emailVisibility", true);
-    formData.append("password", password);
-    formData.append("passwordConfirm", password);
-    formData.append("name", name);
+    formData.append("password", password.current.value);
+    formData.append("passwordConfirm", password.current.value);
+    formData.append("name", name.current.value);
     db.collection("users")
       .create(formData)
       .then((response) => {
-        setLoading(false);
-        setData(response);
-
-        setName("");
-        setUsername("");
-        setEmail("");
-        setPassword("");
         navigate("/login");
         toast.success("Account created!");
       })
@@ -65,25 +54,10 @@ export default function Signup() {
         toast.error(err.data.password?.message);
         toast.error(err.data.avatar?.message);
         toast.error(err.data.email?.message);
-        setError(err.message);
-        setLoading(false);
       });
   }
 
   const fileInput = useRef(null);
-
-  function handlePassword(e) {
-    setPassword(e.target.value);
-  }
-  function handleName(e) {
-    setName(e.target.value);
-  }
-  function handleEmail(e) {
-    setEmail(e.target.value);
-  }
-  function handleUsername(e) {
-    setUsername(e.target.value);
-  }
 
   const formData = new FormData();
 
@@ -105,8 +79,7 @@ export default function Signup() {
             type="text"
             name="username"
             id="username"
-            value={username}
-            onChange={handleUsername}
+            ref={username}
             required
             className="transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64"
           />
@@ -117,8 +90,7 @@ export default function Signup() {
             type="password"
             name="password"
             id="password"
-            value={password}
-            onChange={handlePassword}
+            ref={password}
             required
             className="transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64"
           />
@@ -129,8 +101,7 @@ export default function Signup() {
             type="text"
             name="name"
             id="name"
-            value={name}
-            onChange={handleName}
+            ref={name}
             required
             className="transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64"
           />
@@ -141,8 +112,7 @@ export default function Signup() {
             type="email"
             name="email"
             id="email"
-            value={email}
-            onChange={handleEmail}
+            ref={email}
             required
             className="transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64"
           />

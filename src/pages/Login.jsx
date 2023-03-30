@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useUser } from "../context/user";
 import { db } from "../db";
 
 export default function Login() {
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState();
 
+  const username = useRef(null);
+  const password = useRef(null)
+
   const navigate = useNavigate();
 
   const { user, setUser } = useUser();
-
-  function handleUsername(e) {
-    setUsername(e.target.value);
-  }
-
-  function handlePassword(e) {
-    setPassword(e.target.value);
-  }
 
   useEffect(() => {
     if (db.authStore.model) {
@@ -33,20 +26,18 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     db.collection("users")
-      .authWithPassword(username, password)
+      .authWithPassword(username.current.value, password.current.value)
       .then((response) => {
         setLoading(false);
         setData(response);
-        setPassword("");
-        setUsername("");
         db.authStore.exportToCookie();
         setUser(db.authStore);
         toast.success(`Welcome back, ${db.authStore.model.name.split(" ")[0]}`);
       })
       .catch((err) => {
+        console.log(err)
         setError(err.message);
         setLoading(false);
-        console.log("final error");
       });
   }
 
@@ -68,8 +59,7 @@ export default function Login() {
             type="text"
             name="username"
             id="username"
-            value={username}
-            onChange={handleUsername}
+            ref={username}
             required
             className="transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64"
           />
@@ -80,8 +70,7 @@ export default function Login() {
             type="password"
             name="password"
             id="password"
-            value={password}
-            onChange={handlePassword}
+            ref={password}
             required
             className="transition-all focus:outline-none focus:bg-light border-2 border-gray-300 focus:border-main rounded-lg h-10 w-64"
           />

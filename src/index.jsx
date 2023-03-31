@@ -18,6 +18,7 @@ import Settings from "./pages/Settings";
 import Signup from "./pages/Signup";
 import Stats from "./pages/Stats";
 import Workout from "./pages/Workout";
+import Signout from "./pages/Signout";
 
 export default function App() {
   const [sets, setSets] = useState([]);
@@ -68,6 +69,7 @@ export default function App() {
               <Route path="workout/:id" element={<Workout />} /> {/* Private */}
               <Route path="article" element={<AllArticles />} />
               <Route path="articles/:id" element={<Article />} />
+              <Route path="signout" element={<Signout />} />
               <Route path="*" element={<Lost />} />
             </Route>
           </Routes>

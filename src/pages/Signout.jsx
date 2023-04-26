@@ -1,5 +1,5 @@
 import { useUser } from "../context/user";
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { db } from "../db";
 import { useEffect } from "react";
 import { toast } from "react-toastify";

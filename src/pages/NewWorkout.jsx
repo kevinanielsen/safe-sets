@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Template from "../components/Template";
+import { useNavigate } from "react-router-dom";
+// import Template from "../components/Template";
 import { useUser } from "../context/user";
 import { useWorkout } from "../context/workout";
 import { db } from "../db";
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { toast } from "react-toastify";
 
 export default function NewWorkout() {
-  const [error, setError] = useState(null);
   const [templates, setTemplates] = useState([]);
   const navigate = useNavigate();
 
-  const { sets, setSets, name, setName, startTime, setStartTime, id, setId } =
+  const { setSets, setName, setStartTime, id, setId } =
     useWorkout();
 
   const { user } = useUser();

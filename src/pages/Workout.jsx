@@ -14,14 +14,13 @@ export default function Workout() {
   const { user } = useUser();
 
   if (!user.id) {
-    toast.error('You must be logged in!')
+    toast.error("You must be logged in!");
     return <Navigate to="/" replace />;
   }
 
   /* ---------------------- */
 
-  const { sets, handleSets, setSets, name, setName, startTime, setStartTime } =
-    useWorkout();
+  const { sets, setSets, name, setName, setStartTime, setId } = useWorkout();
 
   const params = useParams();
   const id = params.id;
@@ -33,7 +32,7 @@ export default function Workout() {
   const [unique, setUnique] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);
   const [check, update] = useState(false);
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     // Fetch info about current workout and add data to context
@@ -96,14 +95,15 @@ export default function Workout() {
         user: user.id,
         active: false,
       })
-      .then((res) => {
+      .then(() => {
         callUpdate();
-        toast.success('Successfully saved workout')
+        setId("");
+        toast.success("Successfully saved workout");
       });
   }
 
   function handleChange() {
-    setShow(!show)
+    setShow(!show);
   }
 
   function callUpdate() {
@@ -179,7 +179,14 @@ export default function Workout() {
               End workout
             </button>
           )}
-          {show && <ChooseExercise workoutId={id} callUpdate={callUpdate} exerciseList={exerciseList} handleChange={handleChange} />}
+          {show && (
+            <ChooseExercise
+              workoutId={id}
+              callUpdate={callUpdate}
+              exerciseList={exerciseList}
+              handleChange={handleChange}
+            />
+          )}
         </div>
       </div>
     </main>

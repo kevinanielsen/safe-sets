@@ -7,3 +7,6 @@ A workout tracker with all the features you need to track your progress at the g
 - A comprehensive exercise list to choose from
 - Automatic 1 rep max tracking for your favorite exercise.
 - Full history of all your workouts.
+
+#### How to use
+![How to use](https://github.com/kevinanielsen/safe-sets/blob/main/how-to-use-resized.gif)
